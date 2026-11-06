@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جزوه الکترونیکی درس نگرش و تغییر آن</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<style>
+    :root{
+        --primary:#1e3a5f;
+        --primary-light:#2c5282;
+        --accent:#e2a03f;
+        --accent-light:#f6c667;
+        --bg:#f4f6f9;
+        --card-bg:#ffffff;
+        --text:#2d3748;
+        --text-light:#5a6a7e;
+        --shadow:0 8px 24px rgba(30,58,95,0.12);
+        --shadow-hover:0 14px 34px rgba(30,58,95,0.22);
+        --radius:18px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+        font-family:'Vazirmatn', Tahoma, sans-serif;
+        background:var(--bg);
+        color:var(--text);
+        line-height:1.9;
+        min-height:100vh;
+    }
+    /* ============ صفحه ورود ============ */
+    #loginPage{
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:24px;
+        background:
+            radial-gradient(circle at 15% 20%, rgba(226,160,63,0.18), transparent 40%),
+            radial-gradient(circle at 85% 80%, rgba(44,82,130,0.22), transparent 45%),
+            linear-gradient(135deg,#eef2f7 0%, #dde6f0 100%);
+        position:relative;
+        overflow:hidden;
+    }
+    #loginPage::before{
+        content:"";
+        position:absolute;
+        width:520px;height:520px;
+        border-radius:50%;
+        border:2px dashed rgba(30,58,95,0.12);
+        top:-180px;left:-140px;
+    }
+    #loginPage::after{
+        content:"";
+        position:absolute;
+        width:380px;height:380px;
+        border-radius:50%;
+        border:2px dashed rgba(226,160,63,0.25);
+        bottom:-140px;right:-100px;
+    }
+    .login-card{
+        position:relative;
+        z-index:2;
+        background:var(--card-bg);
+        width:100%;
+        max-width:520px;
+        border-radius:26px;
+        padding:48px 38px 40px;
+        box-shadow:0 20px 60px rgba(30,58,95,0.18);
+        text-align:center;
+        border-top:8px solid var(--accent);
+    }
+    .login-icon{
+        width:88px;height:88px;
+        margin:0 auto 20px;
+        background:linear-gradient(135deg,var(--primary),var(--primary-light));
+        border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        font-size:42px;
+        color:#fff;
+        box-shadow:0 10px 26px rgba(30,58,95,0.35);
+    }
+    .login-card h1{
+        font-size:1.55rem;
+        color:var(--primary);
+        font-weight:800;
+        margin-bottom:6px;
+        line-height:1.6;
+    }
+    .login-card .subtitle{
+        color:var(--text-light);
+        font-size:0.95rem;
+        margin-bottom:28px;
+    }
+    .divider{
+        height:1px;
+        background:linear-gradient(to left, transparent, #d7e0ea, transparent);
+        margin:22px 0;
+    }
+    .field{
+        text-align:right;
+        margin-bottom:18px;
+    }
+    .field label{
+        display:block;
+        font-size:0.9rem;
+        font-weight:600;
+        color:var(--primary);
+        margin-bottom:7px;
+    }
+    .field input{
+        width:100%;
+        padding:13px 16px;
+        border:2px solid #dbe4ee;
+        border-radius:12px;
+        font-family:inherit;
+        font-size:1rem;
+        color:var(--text);
+        background:#f9fbfd;
+        transition:all .25s ease;
+        outline:none;
+    }
+    .field input:focus{
+        border-color:var(--accent);
+        background:#fff;
+        box-shadow:0 0 0 4px rgba(226,160,63,0.15);
+    }
+    .teacher-badge{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        background:linear-gradient(135deg,#fdf6e7,#faecc9);
+        color:#8a5a12;
+        font-weight:700;
+        font-size:0.92rem;
+        padding:9px 20px;
+        border-radius:50px;
+        border:1px solid #f0d9a8;
+        margin-bottom:26px;
+    }
+    .btn{
+        font-family:inherit;
+        cursor:pointer;
+        border:none;
+        border-radius:12px;
+        font-weight:700;
+        transition:all .25s ease;
+    }
+    .btn-primary{
+        width:100%;
+        padding:15px;
+        font-size:1.1rem;
+        color:#fff;
+        background:linear-gradient(135deg,var(--primary),var(--primary-light));
+        box-shadow:0 8px 20px rgba(30,58,95,0.3);
+        display:flex;align-items:center;justify-content:center;gap:10px;
+    }
+    .btn-primary:hover{
+        transform:translateY(-2px);
+        box-shadow:0 12px 28px rgba(30,58,95,0.4);
+    }
+    .login-footnote{
+        margin-top:20px;
+        font-size:0.8rem;
+        color:#94a3b8;
+    }
+
+    /* ============ صفحه فهرست ============ */
+    #menuPage{
+        display:none;
+        min-height:100vh;
+        padding:40px 20px 60px;
+        background:
+            radial-gradient(circle at 90% 10%, rgba(226,160,63,0.10), transparent 35%),
+            radial-gradient(circle at 5% 90%, rgba(44,82,130,0.10), transparent 40%),
+            var(--bg);
+    }
+    .menu-container{
+        max-width:1100px;
+        margin:0 auto;
+    }
+    .menu-header{
+        text-align:center;
+        margin-bottom:38px;
+    }
+    .menu-header .student-pill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        background:#fff;
+        border:1px solid #e2e8f0;
+        color:var(--primary);
+        font-weight:700;
+        font-size:0.9rem;
+        padding:8px 22px;
+        border-radius:50px;
+        box-shadow:0 4px 14px rgba(30,58,95,0.08);
+        margin-bottom:18px;
+    }
+    .menu-header h2{
+        font-size:1.7rem;
+        color:var(--primary);
+        font-weight:800;
+        margin-bottom:8px;
+    }
+    .menu-header p{
+        color:var(--text-light);
+        font-size:0.95rem;
+    }
+    .icons-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+        gap:24px;
+    }
+    .icon-card{
+        background:var(--card-bg);
+        border-radius:var(--radius);
+        padding:30px 24px 26px;
+        text-align:center;
+        cursor:pointer;
+        box-shadow:var(--shadow);
+        border:1px solid #e8eef5;
+        transition:all .3s ease;
+        position:relative;
+        overflow:hidden;
+    }
+    .icon-card::before{
+        content:"";
+        position:absolute;
+        top:0;right:0;left:0;
+        height:5px;
+        background:linear-gradient(90deg,var(--primary),var(--accent));
+        transform:scaleX(0);
+        transform-origin:right;
+        transition:transform .35s ease;
+    }
+    .icon-card:hover{
+        transform:translateY(-6px);
+        box-shadow:var(--shadow-hover);
+        border-color:#d6e2f0;
+    }
+    .icon-card:hover::before{
+        transform:scaleX(1);
+    }
+    .icon-card .icon-circle{
+        width:70px;height:70px;
+        margin:0 auto 16px;
+        border-radius:20px;
+        display:flex;align-items:center;justify-content:center;
+        font-size:32px;
+        color:#fff;
+        transition:transform .3s ease;
+    }
+    .icon-card:hover .icon-circle{
+        transform:scale(1.08) rotate(-4deg);
+    }
+    .icon-card h3{
+        font-size:1.05rem;
+        font-weight:800;
+        color:var(--primary);
+        margin-bottom:6px;
+        line-height:1.6;
+    }
+    .icon-card .icon-sub{
+        font-size:0.82rem;
+        color:var(--text-light);
+        line-height:1.7;
+    }
+    .icon-card .arrow{
+        margin-top:14px;
+        display:inline-block;
+        font-size:0.85rem;
+        font-weight:700;
+        color:var(--accent);
+        opacity:0;
+        transform:translateX(8px);
+        transition:all .3s ease;
+    }
+    .icon-card:hover .arrow{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+    /* رنگ آیکن‌ها */
+    .ic-1{background:linear-gradient(135deg,#1e3a5f,#2c5282);}
+    .ic-2{background:linear-gradient(135deg,#2f855a,#48bb78);}
+    .ic-3{background:linear-gradient(135deg,#b7791f,#e2a03f);}
+    .ic-4{background:linear-gradient(135deg,#6b46c1,#9f7aea);}
+    .ic-5{background:linear-gradient(135deg,#c53030,#f56565);}
+    .ic-6{background:linear-gradient(135deg,#2c7a7b,#38b2ac);}
+    .ic-7{background:linear-gradient(135deg,#4a5568,#718096);}
+
+    /* ============ صفحه محتوا ============ */
+    #contentPage{
+        display:none;
+        min-height:100vh;
+        padding:30px 16px 70px;
+        background:var(--bg);
+    }
+    .content-wrapper{
+        max-width:900px;
+        margin:0 auto;
+    }
+    .content-topbar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:14px;
+        margin-bottom:26px;
+        flex-wrap:wrap;
+    }
+    .btn-back{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:11px 22px;
+        font-size:0.92rem;
+        color:var(--primary);
+        background:#fff;
+        border:2px solid #dbe4ee;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(30,58,95,0.08);
+    }
+    .btn-back:hover{
+        background:var(--primary);
+        color:#fff;
+        border-color:var(--primary);
+        transform:translateY(-2px);
+    }
+    .content-title-chip{
+        font-size:0.85rem;
+        font-weight:700;
+        color:#8a5a12;
+        background:linear-gradient(135deg,#fdf6e7,#faecc9);
+        border:1px solid #f0d9a8;
+        padding:8px 18px;
+        border-radius:50px;
+    }
+    .article-card{
+        background:var(--card-bg);
+        border-radius:var(--radius);
+        padding:38px 34px;
+        box-shadow:var(--shadow);
+        border:1px solid #e8eef5;
+    }
+    .article-card h2{
+        font-size:1.45rem;
+        font-weight:800;
+        color:var(--primary);
+        margin-bottom:22px;
+        padding-bottom:14px;
+        border-bottom:3px solid var(--accent);
+        display:flex;
+        align-items:center;
+        gap:12px;
+    }
+    .article-card h3{
+        font-size:1.1rem;
+        font-weight:800;
+        color:var(--primary-light);
+        margin:26px 0 10px;
+        padding-right:14px;
+        border-right:4px solid var(--accent);
+    }
+    .article-card h4{
+        font-size:1rem;
+        font-weight:700;
+        color:#4a5568;
+        margin:20px 0 8px;
+    }
+    .article-card p{
+        margin-bottom:12px;
+        font-size:0.96rem;
+        color:var(--text);
+    }
+    .article-card ul, .article-card ol{
+        margin:10px 26px 14px 0;
+        font-size:0.95rem;
+    }
+    .article-card li{
+        margin-bottom:6px;
+    }
+    .article-card blockquote{
+        background:#f4f8fc;
+        border-right:5px solid var(--primary-light);
+        border-radius:10px;
+        padding:14px 18px;
+        margin:14px 0;
+        font-size:0.94rem;
+        color:#3a4a5e;
+    }
+    .article-card strong{
+        color:var(--primary);
+    }
+    .example-box{
+        background:linear-gradient(135deg,#fdf9ef,#fbf3e0);
+        border:1px solid #f0dcb0;
+        border-radius:12px;
+        padding:14px 18px;
+        margin:12px 0;
+        font-size:0.93rem;
+    }
+    .example-box .lbl{
+        font-weight:800;
+        color:#9a6a12;
+    }
+    .highlight-box{
+        background:linear-gradient(135deg,#eef4fb,#e2ecf7);
+        border:1px solid #c9dcef;
+        border-radius:12px;
+        padding:14px 18px;
+        margin:14px 0;
+        font-size:0.94rem;
+    }
+    .table-wrap{
+        overflow-x:auto;
+        margin:16px 0;
+        border-radius:12px;
+        border:1px solid #e2e8f0;
+    }
+    table{
+        width:100%;
+        border-collapse:collapse;
+        font-size:0.9rem;
+        background:#fff;
+        min-width:480px;
+    }
+    thead{
+        background:linear-gradient(135deg,var(--primary),var(--primary-light));
+        color:#fff;
+    }
+    th,td{
+        padding:11px 14px;
+        text-align:right;
+        border-bottom:1px solid #e8eef5;
+    }
+    tbody tr:nth-child(even){
+        background:#f8fafc;
+    }
+    tbody tr:hover{
+        background:#eef4fb;
+    }
+    .content-bottom{
+        margin-top:28px;
+        display:flex;
+        justify-content:flex-start;
+    }
+    /* ============ واکنش‌گرایی ============ */
+    @media (max-width:600px){
+        .login-card{padding:36px 24px 30px;}
+        .login-card h1{font-size:1.3rem;}
+        .article-card{padding:26px 18px;}
+        .article-card h2{font-size:1.2rem;}
+        .menu-header h2{font-size:1.35rem;}
+        .icons-grid{grid-template-columns:1fr;}
+        .content-topbar{flex-direction:column;align-items:stretch;}
+        .btn-back{justify-content:center;}
+    }
+</style>
+</head>
+<body>
+
+<!-- ================= صفحه ۱: ورود ================= -->
+<section id="loginPage">
+    <div class="login-card">
+        <div class="login-icon">📘</div>
+        <h1>جزوه الکترونیکی درس<br>نگرش و تغییر آن</h1>
+        <p class="subtitle">بر اساس سرفصل‌های کتاب یوسف کریمی و مطالب کلاسی</p>
+
+        <div class="divider"></div>
+
+        <div class="field">
+            <label for="studentName">نام و نام خانوادگی دانشجو</label>
+            <input type="text" id="studentName" placeholder="مثال: علی محمدی" autocomplete="off">
+        </div>
+
+        <div class="teacher-badge">
+            <span>👨‍🏫</span>
+            <span>مدرس: وحید فلاحی</span>
+        </div>
+
+        <button class="btn btn-primary" onclick="enterMenu()">
+            <span>ورود به جزوه</span>
+            <span>⬅</span>
+        </button>
+
+        <p class="login-footnote">برای ورود، نام خود را وارد کرده و روی دکمه ورود کلیک کنید.</p>
+    </div>
+</section>
+
+<!-- ================= صفحه ۲: فهرست آیکن‌ها ================= -->
+<section id="menuPage">
+    <div class="menu-container">
+        <div class="menu-header">
+            <div class="student-pill">
+                <span>🎓</span>
+                <span id="welcomeName">دانشجوی گرامی</span>
+            </div>
+            <h2>فهرست مطالب جزوه</h2>
+            <p>برای مطالعه هر بخش، روی آیکن مربوطه کلیک کنید.</p>
+        </div>
+
+        <div class="icons-grid">
+
+            <div class="icon-card" onclick="openContent('c1')">
+                <div class="icon-circle ic-1">📖</div>
+                <h3>مقدمه و تعاریف</h3>
+                <div class="icon-sub">جلسه اول — تعریف نگرش و مدل ABC</div>
+                <div class="arrow">مطالعه بخش ⬅</div>
+            </div>
+
+            <div class="icon-card" onclick="openContent('c2')">
+                <div class="icon-circle ic-2">🧩</div>
+                <h3>ویژگی‌ها و ابعاد نگرش</h3>
+                <div class="icon-sub">جلسه سوم — سادگی، تفاوت با واقعیت و ارزش</div>
+                <div class="arrow">مطالعه بخش ⬅</div>
+            </div>
+
+            <div class="icon-card" onclick="openContent('c3')">
+                <div class="icon-circle ic-3">🌱</div>
+                <h3>تکوین نگرش‌ها</h3>
+                <div class="icon-sub">جلسات پنجم و ششم — عوامل شکل‌گیری نگرش</div>
+                <div class="arrow">مطالعه بخش ⬅</div>
+            </div>
+
+            <div class="icon-card" onclick="openContent('c4')">
+                <div class="icon-circle ic-4">🔗</div>
+                <h3>نگرش‌ها و رفتار</h3>
+                <div class="icon-sub">جلسات هفتم و هشتم — رابطه نگرش با رفتار</div>
+                <div class="arrow">مطالعه بخش ⬅</div>
+            </div>
+
+            <div class="icon-card" onclick="openContent('c5')">
+                <div class="icon-circle ic-5">🔄</div>
+                <h3>تغییر نگرش</h3>
+                <div class="icon-sub">جلسات نهم و دهم — الگوها و نظریه‌ها</div>
+                <div class="arrow">مطالعه بخش ⬅</div>
+            </div>
+
+            <div class="icon-card" onclick="openContent('c6')">
+                <div class="icon-circle ic-6">📝</div>
+                <h3>جمع‌بندی و نکات کلیدی</h3>
+                <div class="icon-sub">مفاهیم مهم و سؤالات تمرینی آزمون</div>
+                <div class="arrow">مطالعه بخش ⬅</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= صفحه ۳: محتوا ================= -->
+<section id="contentPage">
+    <div class="content-wrapper">
+        <div class="content-topbar">
+            <button class="btn btn-back" onclick="backToMenu()">
+                <span>➡</span>
+                <span>بازگشت به فهرست</span>
+            </button>
+            <span class="content-title-chip" id="contentChip">بخش</span>
+        </div>
+
+        <div class="article-card" id="articleCard">
+            <!-- محتوا به صورت داینامیک تزریق می‌شود -->
+        </div>
+
+        <div class="content-bottom">
+            <button class="btn btn-back" onclick="backToMenu()">
+                <span>➡</span>
+                <span>بازگشت به فهرست</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+/* ================== داده‌های محتوا ================== */
+const contentData = {
+
+c1: {
+    chip: "فصل اول — مقدمه و تعاریف",
+    html: `
+        <h2>📖 فصل اول: مقدمه و تعاریف</h2>
+
+        <h3>1-1. چرا نگرش مهم است؟</h3>
+        <p>نگرش یکی از <strong>برجسته‌ترین و متمایزترین مفاهیم روان‌شناسی اجتماعی</strong> است. برخی از روان‌شناسان اجتماعی، موضوع اصلی این علم را «مطالعه نگرش‌های افراد» تعریف کرده‌اند. اهمیت نگرش از چند جهت است:</p>
+        <ul>
+            <li>نگرش‌ها <strong>تعیین‌کننده رفتار</strong> هستند؛ یعنی اگر بدانیم کسی چه نگرشی دارد، می‌توانیم رفتار او را پیش‌بینی کنیم.</li>
+            <li>با افزایش نگرش‌های فرد در مورد مسائل مختلف، <strong>احتیاج به فکر کردن و تصمیم‌گیری‌های تازه کم می‌شود</strong> و رفتار او قابل پیش‌بینی‌تر و سریع‌تر می‌گردد.</li>
+            <li>آگاهی از نگرش‌های مردم به ما امکان می‌دهد <strong>رفتار آنان را کنترل کنیم</strong> (مثلاً در بازاریابی، سیاست، آموزش).</li>
+        </ul>
+
+        <h3>1-2. تعریف نگرش</h3>
+        <p><strong>ساده‌ترین تعریف:</strong> نگرش عبارت است از <strong>ارزشیابی ما نسبت به یک شیء، موضوع یا پدیده</strong>.</p>
+        <p>دو تعریف کلاسیک:</p>
+        <blockquote><strong>الف) تعریف کراجفیلد (۱۹۴۸) — دیدگاه شناختی:</strong><br>«نگرش عبارت است از سازمان پایدار فرایندهای انگیزشی، عاطفی، ادراکی و شناختی در ارتباط با برخی از جنبه‌های دنیای فرد.»</blockquote>
+        <blockquote><strong>ب) تعریف گوردون آلپورت (۱۹۳۵) — دیدگاه یادگیری/رفتارگرایی:</strong><br>«نگرش یک حالت آمادگی ذهنی و عصبی است که از طریق تجربه سازمان می‌یابد و بر واکنش فرد نسبت به تمامی موضوع‌ها و موقعیت‌های وابسته به نگرش، تأثیر مستقیم و پویا بر جای می‌گذارد.»</blockquote>
+        <div class="example-box"><span class="lbl">مثال:</span> وقتی می‌گویید «من از درس ریاضی خوشم می‌آید»، این یک نگرش است. این نگرش سه لایه دارد: باورهایی درباره ریاضی (شناخت)، احساس خوشایند نسبت به آن (عاطفه) و تمایل به شرکت در کلاس ریاضی (رفتار).</div>
+
+        <h3>1-3. سه جزء نگرش (مدل ABC)</h3>
+        <p>هر نگرش از سه جزء تشکیل شده است:</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>جزء</th><th>نام لاتین</th><th>توضیح</th><th>مثال (نگرش به ورزش)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>شناختی</strong></td><td>Cognitive</td><td>باورها و اطلاعات فرد درباره موضوع نگرش</td><td>«ورزش برای سلامت قلب مفید است.»</td></tr>
+                    <tr><td><strong>عاطفی</strong></td><td>Affective</td><td>احساسات و هیجانات نسبت به موضوع</td><td>«از دویدن احساس لذت می‌کنم.»</td></tr>
+                    <tr><td><strong>رفتاری</strong></td><td>Behavioral</td><td>تمایل یا آمادگی برای عمل کردن</td><td>«هر روز صبح می‌دوم.»</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="highlight-box"><strong>نکته مهم:</strong> این سه جزء معمولاً با هم هماهنگ‌اند، اما همیشه این‌طور نیست. مثلاً ممکن است بدانید سیگار بد است (شناخت منفی) اما همچنان از آن لذت ببرید (عاطفه مثبت) و آن را بکشید (رفتار). این ناهماهنگی در فصل تغییر نگرش (ناهماهنگی شناختی) بررسی می‌شود.</div>
+    `
+},
+
+c2: {
+    chip: "فصل دوم — ویژگی‌ها و ابعاد نگرش",
+    html: `
+        <h2>🧩 فصل دوم: ویژگی‌ها و ابعاد نگرش</h2>
+
+        <h3>2-1. سه ویژگی مهم نگرش‌ها</h3>
+        <ol>
+            <li><strong>موضوع‌مندی:</strong> هر نگرشی معطوف به یک موضوع است؛ این موضوع می‌تواند شخص، رویداد یا موقعیتی خاص باشد.</li>
+            <li><strong>ارزشیابانه و قضاوت‌محور بودن:</strong> در نگرش، باور به خوب یا بد بودن، مناسب یا نامناسب بودن، باارزش یا بی‌ارزش بودن نهفته است.</li>
+            <li><strong>ثبات و دوام نسبی:</strong> نگرش‌ها معمولاً پایدارند و به سرعت تغییر نمی‌کنند.</li>
+        </ol>
+
+        <h3>2-2. سادگی یا پیچیدگی نگرش؟</h3>
+        <p>تحقیقات نشان داده‌اند که <strong>درک مردم از اشیا و اشخاص، صرفاً با یک عامل ارزشیابانه (خوب/بد) قابل توجیه است.</strong> آندرسون نشان داد حتی پس از فراموش شدن محتوای یک نگرش، <strong>ارزشیابی نسبت به موضوع آن نگرش همچنان برقرار می‌ماند</strong>؛ این یعنی <strong>عنصر عاطفی با دوام‌تر و اصلی‌تر از عنصر شناختی است</strong>.</p>
+        <p>پس ساخت کلی نگرش ممکن است پیچیده باشد، اما <strong>بخش احساسی آن غالباً بسیار ساده است</strong>. این «تضاد بین پیچیدگی شناختی و سادگی ارزشیابانه» یکی از دو نکته‌ای است که همیشه باید به آن توجه داشت. نکته دوم این است که <strong>همه عناصر نگرش به طور متقابل به یکدیگر مربوط‌اند</strong> و هر عنصر بر کل نگرش اثر می‌گذارد.</p>
+
+        <h3>2-3. تفاوت نگرش با واقعیت</h3>
+        <p>بارزترین صفت ممیزه نگرش، <strong>داشتن عنصر ارزشیابانه و عاطفی</strong> است. همچنین نگرش و واقعیت از نظر ثبات و نحوه تغییر تفاوت دارند: <strong>یک نگرش وقتی ایجاد و مستقر شد، در مقابل تغییر بسیار مقاوم‌تر از واقعیت است.</strong></p>
+        <div class="example-box"><span class="lbl">مثال:</span> پذیرش یک واقعیت علمی جدید آسان‌تر از تغییر یک نگرش سیاسی است.</div>
+
+        <h3>2-4. تفاوت نگرش با ارزش</h3>
+        <ul>
+            <li><strong>ارزش‌ها</strong> هدف‌های گسترده‌تر و انتزاعی‌ترند و غالباً <strong>فاقد شیء یا موضوع مشخص یا نقطه ارجاع</strong> هستند.</li>
+            <li>از ارزش‌ها به عنوان <strong>معیار قضاوت یا استانداردهای انتزاعی</strong> استفاده می‌شود و شخص از آن‌ها برای تصمیم‌گیری بهره می‌برد تا از آن طریق نگرش‌ها و باورهای خاصی را در خود ایجاد کند.</li>
+        </ul>
+        <div class="example-box"><span class="lbl">مثال:</span> «عدالت» یک ارزش است؛ «نگرش من نسبت به قانون مالیات» یک نگرش است که از ارزش عدالت من سرچشمه می‌گیرد.</div>
+
+        <h3>2-5. سه نوع نگرش بر اساس منشأ</h3>
+        <p><strong>الف) نگرش‌های مبتنی بر شناخت:</strong> زمانی که ارزشیابی ما مبتنی بر باورهایمان درباره خصوصیات یک موضوع نگرشی باشد. کارکرد چنین نگرشی <strong>«ارزیابی شیء»</strong> است تا سریع بتوانیم بگوییم آیا آن شیء ارزش توجه یا بررسی را دارد یا نه.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> انتخاب لپ‌تاپ بر اساس مقایسه مشخصات فنی.</div>
+
+        <p><strong>ب) نگرش‌های مبتنی بر عواطف:</strong> نگرشی که بیشتر مبتنی بر هیجان‌ها و ارزش‌ها باشد تا بر ارزشیابی عینی مزایا و معایب. این نگرش‌ها سه ویژگی مشترک دارند: (۱) حاصل بررسی منطقی موضوعات نیستند؛ (۲) استدلال منطقی به ندرت قادر به تغییرشان است؛ (۳) اغلب با ارزش‌های افراد پیوند دارند.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> احساس مثبت شدید نسبت به یک شخص علی‌رغم شناخت منفی از او.</div>
+
+        <p><strong>ج) نگرش‌های مبتنی بر رفتار:</strong> نگرش‌هایی که از مشاهده رفتار خودمان شکل می‌گیرند (مبنای نظریه خودادراکی).</p>
+    `
+},
+
+c3: {
+    chip: "فصل سوم — تکوین نگرش‌ها",
+    html: `
+        <h2>🌱 فصل سوم: تکوین نگرش‌ها</h2>
+
+        <p>نگرش‌ها از کجا می‌آیند؟ چهار عامل کلی تکوین نگرش عبارت‌اند از: <strong>رفع نیاز، کسب اطلاعات، تعلق گروهی، و شخصیت فرد.</strong> اما مکانیزم‌های جزئی‌تر عبارت‌اند از:</p>
+
+        <h3>3-1. تجربه مستقیم</h3>
+        <p>بسیاری از نگرش‌ها حاصل تجربه مستقیم با موضوع یا شیء نگرشی هستند. این شکل‌گیری ممکن است حاصل مشاهده یک رویداد مهم باشد. <strong>تجارب بسیار خوب یا بسیار بد</strong> نقش قوی‌تری در شکل‌گیری نگرش دارند.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> کسی که یک بار غذای فاسد خورده و بیمار شده، نگرش شدید منفی نسبت به آن غذا پیدا می‌کند.</div>
+
+        <h3>3-2. اثر در معرض قرار گرفتن (Mere Exposure)</h3>
+        <p>تعداد دفعاتی که ما با یک موضوع یا شیء نگرشی روبرو می‌شویم، ارزشیابی ما را از آن تحت تأثیر قرار می‌دهد. <strong>زایونک (۱۹۶۸)</strong> مفهوم <strong>«اثر در معرض قرار گرفتن صرف»</strong> را مطرح کرد: تکرار در معرض قرار گرفتن، پاسخ‌های ما را نسبت به یک شیء یا شخص نیرومندتر و متکثرتر می‌کند و این تکرار باعث نوعی برتری نگرشی در ذهن ما می‌شود (چه در جهت مثبت و چه منفی).</p>
+        <div class="example-box"><span class="lbl">مثال:</span> شنیدن مکرر یک آهنگ در رادیو باعث می‌شود کم‌کم آن را دوست داشته باشید. یا دیدن مکرر یک تبلیغ، نگرش مثبت‌تری نسبت به محصول ایجاد می‌کند.</div>
+
+        <h3>3-3. شرطی شدن کلاسیک</h3>
+        <p>در شرطی شدن کلاسیک، یک محرک خنثی با یک محرک غیرشرطی (که به‌طور طبیعی پاسخ ایجاد می‌کند) همراه می‌شود و پس از چند بار تکرار، خودِ محرک خنثی به تنهایی پاسخ شرطی ایجاد می‌کند.</p>
+        <div class="example-box"><span class="lbl">مثال کلاسی (محسن و ورامین):</span> محسن شب در ایستگاه اتوبوس ورامین مورد حمله قرار می‌گیرد (محرک غیرشرطی = حمله؛ پاسخ غیرشرطی = ترس). بعدها هر زمان اسم «ورامین» را می‌شنود (محرک شرطی) دچار اضطراب می‌شود (پاسخ شرطی). به این ترتیب نگرش منفی نسبت به ورامین در او شکل گرفته است.</div>
+        <div class="example-box"><span class="lbl">مثال دیگر (نگرش سیاسی):</span> کودکی که پدرش با حزب خاصی خوش‌رفتار است (محرک غیرشرطی مثبت)، به تدریج خودِ حزب (محرک شرطی) را نیز مثبت ارزیابی می‌کند.</div>
+
+        <h3>3-4. شرطی شدن کنشگر (عامل)</h3>
+        <p>در شرطی شدن کنشگر، رفتار به دلیل <strong>تقویت</strong> (پاداش) یا <strong>تنبیه</strong> افزایش یا کاهش می‌یابد. اگر رفتار کودکانه‌ای (مثلاً بازی کردن با کودک سیاه‌پوست) توسط والدین تأیید و تشویق شود، نگرش مثبت نسبت به آن موضوع در کودک تقویت می‌شود. اگر تنبیه شود، نگرش منفی شکل می‌گیرد.</p>
+
+        <h3>3-5. الگوگیری (یادگیری مشاهده‌ای)</h3>
+        <p>همه کسانی که در محیط اطراف ما هستند — دوستان، والدین، بزرگسالان، معلمان و هر فرد مهم دیگر — می‌توانند مورد مشاهده و الگوگیری قرار گیرند. <strong>آنچه مورد الگوبرداری قرار می‌گیرد عمل والدین است، نه گفته آنان.</strong></p>
+        <div class="example-box"><span class="lbl">مثال:</span> کودکانی که والدینشان کتاب می‌خوانند، خودشان نیز نگرش مثبتی به کتاب خواندن پیدا می‌کنند، حتی اگر والدینشان مرتب به آن‌ها بگویند «کتاب بخوان!»</div>
+        <div class="highlight-box"><strong>نکته مهم:</strong> شکل‌گیری نگرش مقدمتاً به صورت یک فرایند یادگیری آغاز می‌شود. شخص در معرض اطلاعات و تجربه‌های مربوط به یک شیء یا موضوع خاص قرار می‌گیرد و بر اثر فرایندهای تقویت و تقلید، نگرشی نسبت به آن پیدا می‌کند. <strong>اما وقتی نگرش شکل گرفت، اصل همسازی شناختی اهمیت افزایشی پیدا می‌کند</strong>؛ یعنی فرد دیگر حالتی منفعل نخواهد داشت و اطلاعات تازه رسیده را بر حسب آنچه قبلاً آموخته است، تفسیر و تعبیر می‌کند.</div>
+
+        <h3>3-6. مقایسه اجتماعی</h3>
+        <p><strong>تعریف:</strong> تمایل ما به مقایسه خودمان با دیگران در جهت اینکه بدانیم آیا دیدگاه‌های ما در مورد واقعیت‌های اجتماعی درست‌اند یا خیر.</p>
+        <p>بخش مهمی از نگرش‌های ابتدایی (incipient attitudes) ما از طریق <strong>کسب اطلاعات اجتماعی یا مقایسه اجتماعی</strong> کسب می‌گردند. بدین ترتیب بسیاری از اوقات نگرش‌های ما <strong>ترکیبی از اطلاعات اجتماعی به همراه تمایل به داشتن دیدگاه‌هایی است که مورد تحسین و احترام افراد مورد تأیید ما باشد.</strong></p>
+        <div class="example-box"><span class="lbl">مثال:</span> دانشجویی که نمی‌داند نمره ۱۵ در یک درس خوب است یا بد، نمره خود را با همکلاسی‌هایش مقایسه می‌کند. یا کسی که نظر سیاسی‌اش را با نظرات افراد مورد احترامش تنظیم می‌کند.</div>
+
+        <h3>3-7. حرکات ماهیچه‌ها (بازخورد بدنی)</h3>
+        <p>حالات چهره و حرکات ماهیچه‌های بدن می‌توانند بر نگرش و احساس ما اثر بگذارند. (مثلاً لبخند زدن می‌تواند احساس مثبت‌تری ایجاد کند — مبنای فرضیه بازخورد چهره‌ای.)</p>
+
+        <h3>3-8. عوامل ژنتیکی</h3>
+        <p>شواهد مختصر اما در حال افزایشی به دست آمده است که نشان می‌دهند <strong>عوامل ژنتیکی در نگرش‌های ما تأثیر دارند</strong>. برخی نگرش‌ها <strong>قابل توارث‌تر</strong> از برخی دیگرند و <strong>وجوه ارثی سخت‌تر تحت تأثیر عوامل نفوذ قرار می‌گیرند</strong> تا وجوهی که قابلیت توارث کمتری دارند.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> نگرش نسبت به مسائل مذهبی و سیاسی توارث‌پذیری بالاتری نسبت به نگرش نسبت به برندهای تجاری دارند.</div>
+    `
+},
+
+c4: {
+    chip: "فصل چهارم — نگرش‌ها و رفتار",
+    html: `
+        <h2>🔗 فصل چهارم: نگرش‌ها و رفتار</h2>
+
+        <h3>4-1. رابطه نگرش و رفتار: مسئله اصلی</h3>
+        <p>روان‌شناسان اجتماعی غالباً بر نگرش‌ها برای پیش‌بینی و تبیین رفتار تکیه می‌کنند. <strong>اما مشاهده شده است که تشخیص اثرات نگرش‌ها بر رفتار به آن آسانی که در نخست به نظر می‌آید، نیست.</strong></p>
+        <p>تحقیقات تجربی نشان می‌دهد که <strong>عمدتاً رابطه ضعیف و بی‌ثباتی بین نگرش‌های کلامی و رفتارهای غیرکلامی</strong> با توجه به موضوع‌های نگرشی وجود دارد. به بیان دیگر، تحقیقات روان‌شناسی اجتماعی با وجود پذیرش اصل وجود ارتباط میان نگرش و رفتار، <strong>نتوانستند رابطه دقیقی بین نگرش‌ها و رفتار پیدا کنند.</strong></p>
+        <div class="example-box"><span class="lbl">مثال کلاسیک (لپییر):</span> لپییر در سال ۱۹۳۴ همراه یک زوج چینی به هتل‌ها و رستوران‌های آمریکا سفر کرد. تقریباً همه جا با آن‌ها بدرفتاری شد (رفتار منفی). اما وقتی بعداً از همان هتل‌ها و رستوران‌ها پرسشنامه‌ای فرستاد و پرسید «آیا به چینی‌ها خدمات می‌دهید؟»، تقریباً همه پاسخ دادند «نه» — یعنی نگرش کلامی‌شان منفی بود — در حالی که در عمل به آن‌ها خدمات داده بودند. نکته: <strong>نگرش ابرازشده در پرسشنامه با رفتار واقعی در موقعیت رو در رو لزوماً یکی نیست.</strong></div>
+
+        <h3>4-2. متغیرهای تعدیل‌کننده (Moderator Variables)</h3>
+        <p>تحقیقات به سه دسته متغیر تعدیل‌کننده اشاره می‌کنند که تعیین می‌کنند نگرش <strong>چه وقت</strong> بر رفتار اثر می‌کند:</p>
+        <ol>
+            <li>جنبه‌های مربوط به موقعیت</li>
+            <li>جنبه‌های مربوط به نگرش</li>
+            <li>جنبه‌های مربوط به شخص</li>
+        </ol>
+
+        <h4>الف) جنبه‌های موقعیت</h4>
+        <p><strong>۱. اجبار موقعیتی:</strong> برخی اوقات مردم نمی‌توانند نگرش خود را ابراز کنند زیرا چنین کاری با هنجارهای یک موقعیت مفروض تناقض دارد. این نوع هنجار، رابطه بین نگرش و رفتار را تعدیل می‌کند.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> دانشجویی که نگرش منفی به تقلب دارد، در جلسه امتحان به دلیل هنجار گروه (همه تقلب می‌کنند) ممکن است تقلب کند؛ یا برعکس، کسی که نگرش مثبتی به صحبت در کلاس دارد، در کلاس ساکت و رسمی، حرف نمی‌زند.</div>
+
+        <p><strong>۲. فشار وقت:</strong> وقتی افراد تحت فشار وقت باشند و مجبور باشند خیلی سریع تصمیم بگیرند و عمل کنند، معمولاً تمایل دارند به نگرش‌های خود رجوع کنند و از میان آن‌ها به عنوان راهنمای سریع و آسان برای تصمیم‌گیری استفاده کنند. <strong>بدین ترتیب در موقعیت‌هایی که فشار زمان زیاد باشد، پیوند نگرش و رفتار نیرومندتر از موقعیت‌هایی است که چنین فشاری وجود ندارد</strong> یا موقعیت‌هایی که افراد وقت بیشتری دارند تا اطلاعات موجود را با دقت بیشتری بررسی کنند.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> در خرید سریع یک محصول در فروشگاه (بدون وقت مقایسه)، نگرش کلی شما به برند تعیین‌کننده است؛ اما اگر وقت داشته باشید، مشخصات فنی را مقایسه می‌کنید.</div>
+
+        <p><strong>۳. امکان همخوانی نگرش‌ها با رفتار:</strong> ما به‌طور کلی موقعیت‌هایی را ترجیح می‌دهیم که به ما امکان می‌دهند همخوانی بین نگرش‌ها و رفتارمان را حفظ کنیم. در واقع چون افراد تمایل دارند موقعیت‌هایی را انتخاب کنند که بتوانند رفتارهای همخوان با نگرش‌های خود را انجام دهند، در چنین موقعیت‌هایی <strong>نگرش‌ها نیرومندتر شده و پیش‌بینی‌کننده‌های دقیق‌تری برای رفتار خواهند بود.</strong></p>
+        <div class="example-box"><span class="lbl">مثال:</span> فردی که نگرش مثبتی به ورزش دارد، باشگاهی را انتخاب می‌کند که در آن ورزش کند؛ در آن موقعیت، نگرش او رفتارش را دقیق پیش‌بینی می‌کند.</div>
+
+        <h4>ب) جنبه‌های مربوط به خود نگرش‌ها</h4>
+        <p><strong>۱. منشأ نگرش:</strong></p>
+        <ul>
+            <li><strong>دست اول (تجربه مستقیم):</strong> نگرش‌هایی که از تجربه مستقیم حاصل شده‌اند، <strong>پیش‌بینی‌کننده‌های قوی‌تری برای رفتار</strong> هستند.</li>
+            <li><strong>دست دوم:</strong> نگرش‌هایی که از طریق شنیده‌ها و منابع غیرمستقیم شکل گرفته‌اند، رابطه ضعیف‌تری با رفتار دارند.</li>
+        </ul>
+        <p><strong>۲. نیرومندی نگرش:</strong> نگرش‌های نیرومند، رفتار را بهتر پیش‌بینی می‌کنند. نیرومندی نگرش تحت تأثیر عوامل زیر است:</p>
+        <ul>
+            <li><strong>افراطی بودن یا شدت:</strong> نگرش‌های افراطی‌تر، رفتار را بهتر پیش‌بینی می‌کنند.</li>
+            <li><strong>درجه اهمیت:</strong> نگرش نسبت به موضوعی که برای فرد مهم است، رفتار را بهتر پیش‌بینی می‌کند.</li>
+            <li><strong>نفع شخصی:</strong> اگر موضوع نگرش به نفع شخصی فرد مربوط باشد، رابطه نگرش-رفتار قوی‌تر است.</li>
+            <li><strong>همانندسازی اجتماعی:</strong> اگر نگرش با هویت گروهی فرد گره خورده باشد (مثلاً نگرش سیاسی یک عضو حزب)، رفتار را بهتر پیش‌بینی می‌کند.</li>
+            <li><strong>وابسته به ارزش بودن:</strong> نگرش‌هایی که با ارزش‌های بنیادین فرد پیوند دارند، نیرومندترند.</li>
+            <li><strong>دانش:</strong> هرچه فرد درباره موضوع نگرش دانش بیشتری داشته باشد، رابطه نگرش-رفتار قوی‌تر است.</li>
+            <li><strong>قابلیت دسترسی:</strong> نگرش‌هایی که به راحتی در ذهن فعال می‌شوند (در دسترس‌ترند)، رفتار را بهتر پیش‌بینی می‌کنند.</li>
+        </ul>
+
+        <h4>ج) جنبه‌های شخصی</h4>
+        <p><strong>۱. خودنظارت‌گری (Self-Monitoring):</strong> افرادی که «خودنظارت‌گر بالا» هستند، رفتار خود را بر اساس موقعیت و انتظارات دیگران تنظیم می‌کنند؛ بنابراین نگرش‌هایشان رفتارشان را کمتر پیش‌بینی می‌کند. در مقابل، «خودنظارت‌گر پایین» بیشتر بر اساس نگرش‌های درونی خود عمل می‌کنند.</p>
+        <p><strong>۲. نیاز به شناخت (Need for Cognition):</strong> افرادی که نیاز بالایی به شناخت دارند، بیشتر به اطلاعات و استدلال توجه می‌کنند و نگرش‌هایشان با رفتارشان هماهنگ‌تر است.</p>
+
+        <h3>4-3. نگرش‌ها چگونه بر رفتار اثر می‌کنند؟ دو مکانیزم بنیادی</h3>
+
+        <h4>الف) نظریه الگوی فرآیندی نگرش به رفتار</h4>
+        <p>طبق این الگو، <strong>در موقعیت‌هایی که ما وقت لازم برای تفکر مستدل را نداریم</strong>، نگرش‌ها به صورت زیر رفتارها را هدایت می‌کنند:</p>
+        <div class="highlight-box"><strong>رویدادی نگرش ما را برمی‌انگیزد ← نگرش برانگیخته شده بر درک ما از موضوع نگرش تأثیر می‌گذارد ← آن رویداد تعریف می‌شود ← رفتار</strong><br>(و دانش ذخیره شده درباره اینکه در آن موقعیت چه چیزی مناسب یا مورد انتظار است، به رفتار فعال می‌شود.)</div>
+        <p><strong>نکته:</strong> نگرش‌ها وقتی می‌توانند رفتار غیرارادی را پیش‌بینی کنند که <strong>قویاً در دسترس</strong> باشند. وقتی نگرش‌ها در دسترس نباشند، مردم بیشتر تحت تأثیر <strong>متغیرهای موقعیتی</strong> قرار می‌گیرند.</p>
+        <div class="example-box"><span class="lbl">مثال:</span> راننده‌ای که ناگهان با ماشین دیگری مواجه می‌شود (بدون وقت فکر)، بر اساس نگرش در دسترس خود (مثلاً «احتیاط همیشه») ترمز می‌کند.</div>
+
+        <h4>ب) نظریه رفتار برنامه‌ریزی شده (آجزن و فیشابین، ۱۹۸۰)</h4>
+        <p>طبق این الگو، رفتار از طریق <strong>قصد رفتاری</strong> پیش‌بینی می‌شود و قصد رفتاری خود تحت تأثیر سه عامل است:</p>
+        <ol>
+            <li><strong>نگرش نسبت به رفتار</strong> (ارزشیابی فرد از انجام آن رفتار)</li>
+            <li><strong>هنجارهای ذهنی</strong> (برداشت فرد از اینکه افراد مهم برای او انجام آن رفتار را تأیید یا رد می‌کنند)</li>
+            <li><strong>کنترل رفتاری ادراک‌شده</strong> (برداشت فرد از اینکه چقدر می‌تواند آن رفتار را انجام دهد)</li>
+        </ol>
+        <div class="highlight-box"><strong>نکته:</strong> این نظریه برخلاف الگوی فرآیندی، برای موقعیت‌هایی است که فرد <strong>وقت لازم برای تفکر مستدل</strong> دارد و رفتار را به‌طور ارادی برنامه‌ریزی می‌کند.</div>
+        <div class="example-box"><span class="lbl">مثال:</span> تصمیم به شروع رژیم غذایی: نگرش مثبت به رژیم (فکر می‌کنم خوب است)، هنجار ذهنی (خانواده‌ام تشویق می‌کنند)، کنترل ادراک‌شده (فکر می‌کنم می‌توانم) ← قصد ← رفتار.</div>
+    `
+},
+
+c5: {
+    chip: "فصل پنجم — تغییر نگرش",
+    html: `
+        <h2>🔄 فصل پنجم: تغییر نگرش</h2>
+
+        <h3>5-1. الگوهای کلی تغییر نگرش</h3>
+        <p>سه الگوی کلی برای تغییر نگرش وجود دارد:</p>
+        <ol>
+            <li><strong>الگوهای یادگیری</strong>
+                <ul>
+                    <li>نظریه محرک – پاسخ</li>
+                    <li>نظریه مشوق‌ها و تعارض‌ها</li>
+                </ul>
+            </li>
+            <li><strong>الگوهای شناختی</strong>
+                <ul>
+                    <li>نظریه تعادل</li>
+                    <li>نظریه توافق</li>
+                    <li>نظریه همسازی شناختی</li>
+                    <li>نظریه قضاوت اجتماعی</li>
+                </ul>
+            </li>
+            <li><strong>الگوی کارکردی</strong></li>
+        </ol>
+
+        <h3>5-2. الگوی یادگیری: نظریه محرک – پاسخ</h3>
+        <p><strong>مفروضات الگو درباره ماهیت انسان:</strong> یکی از اصول بنیادی در رویکردهای محرک – پاسخ به تغییر نگرش آن است که <strong>تقویت‌کننده‌های ارائه‌شده برای تغییر نگرش باید قوی‌تر از تقویت‌کننده‌های ابی باشند که وضع موجود را حفظ می‌کنند.</strong></p>
+        <div class="highlight-box"><strong>مدل S-O-R-C:</strong> محرک (Stimulus) ← ارگانیزم (Organism) ← پاسخ (Response) ← پیامدها (Consequences)</div>
+        <p><strong>کارل هاولند</strong> (از نظریه‌پردازان این حوزه) معتقد بود اصولی که برای کسب مهارت‌های بدنی و کلامی به کار می‌روند، می‌توانند برای درک چگونگی شکل‌گیری و تغییر نگرش‌ها نیز به کار روند. وی <strong>چهار عنصر</strong> را در زمینه پیام‌های متقاعدکننده مشخص کرد:</p>
+        <ol>
+            <li><strong>منبع ارائه پیام</strong> (چه کسی می‌گوید؟ — اعتبار، جذابیت)</li>
+            <li><strong>ویژگی‌های پیام</strong> (چگونه گفته می‌شود؟ — استدلال قوی/ضعیف، ترس)</li>
+            <li><strong>زمینه پیام</strong> (در چه شرایطی گفته می‌شود؟)</li>
+            <li><strong>شخصیت دریافت‌کننده پیام</strong> (چه کسی می‌شنود؟ — هوش، عزت نفس)</li>
+        </ol>
+        <div class="example-box"><span class="lbl">مثال:</span> یک تبلیغ ضدسیگار (پیام) که توسط یک پزشک معتبر (منبع) با استدلال علمی قوی (ویژگی پیام) در مدرسه (زمینه) برای نوجوانان (دریافت‌کننده) ارائه شود، مؤثرتر است.</div>
+
+        <h3>5-3. نظریه مشوق‌ها و تعارض‌ها</h3>
+        <p>این نظریه، چهارچوب نظری موقعیت نگرش را برحسب یک تعارض <strong>گرایشی/اجتنابی</strong> در نظر می‌گیرد.</p>
+        <p><strong>بر طبق الگوی مشوق نیرومندی:</strong> نگرش فرد را نسبی مشوق‌ها تعیین می‌کنند. <strong>اگر نگرش کسب‌شده اولیه منفی باشد، نگرش جدید تنها هنگامی مثبت خواهد بود که اتخاذ موضع جدید در بردارنده مشوق بیشتری باشد.</strong></p>
+        <div class="example-box"><span class="lbl">مثال:</span> کارمندی که نگرش منفی به اضافه‌کاری دارد، تنها وقتی نگرشش مثبت می‌شود که پاداش (مشوق) اضافه‌کاری بسیار زیاد باشد.</div>
+
+        <h3>5-4. الگوهای شناختی</h3>
+
+        <h4>الف) نظریه تعادل (فریتس هایدر، ۱۹۵۸)</h4>
+        <p>شکلی از الگوی هماهنگی شناختی. <strong>نکته اصلی:</strong> در نظام شناختی هر فرد تمایلی نسبت به حرکت از یک حالت عدم هماهنگی به سوی یک حالت هماهنگی وجود دارد. پس حالت‌های عدم تعادل به سمت یکی از حالت‌های متعادل حرکت خواهند کرد.</p>
+        <p>در این نظریه سه عنصر داریم: <strong>P</strong> (شخص)، <strong>O</strong> (شخص دیگر)، <strong>X</strong> (موضوع نگرش). روابط بین آن‌ها می‌تواند مثبت (+) یا منفی (−) باشد. <strong>حالت متعادل وقتی است که حاصل‌ضرب سه رابطه مثبت باشد</strong> (یا یک رابطه مثبت و دو رابطه منفی).</p>
+        <div class="example-box"><span class="lbl">مثال:</span> اگر شما (P) از علی (O) خوشتان بیاید (+) و علی از فوتبال خوشش بیاید (+) و شما هم از فوتبال خوشتان بیاید (+)، حالت متعادل است. اما اگر شما از علی خوشتان بیاید (+) و علی از فوتبال خوشش بیاید (+) ولی شما از فوتبال بدتان بیاید (−)، حالت نامتعادل است و شما یا نگرش خود به علی یا به فوتبال را تغییر می‌دهید.</div>
+
+        <h4>ب) نظریه ناهماهنگی شناختی (لیون فستینگر، ۱۹۵۷)</h4>
+        <p><strong>مهم‌ترین نظریه این فصل.</strong></p>
+        <p><strong>تعریف:</strong> ناهماهنگی شناختی حالتی از <strong>تنش</strong> است که از داشتن دو فرایند شناختی (دو اندیشه، دو نگرش، دو باور یا دو عقیده) <strong>همزمان که از نظر روان‌شناختی نامتناجس هستند</strong> حاصل می‌شود. از آنجا که پیدایش حالت ناهماهنگی شناختی <strong>ناخوشایند</strong> است و منجر به بروز <strong>عاطفه منفی</strong> می‌شود، افراد برای <strong>کاهش آن برانگیخته می‌شوند.</strong></p>
+        <p><strong>مفروضات زیربنایی:</strong> نظریه ناهماهنگی شناختی مردم را موجوداتی منطقه ترسیم نمی‌کند، بلکه آنان را <strong>موجوداتی دلیل‌تراش</strong> مجسم می‌سازد. ما انسان‌ها بیش از آنکه برای صحت فکر و عمل خویش برانگیخته باشیم، متمرکز بر این هستیم که <strong>تصور کنیم فکر و عملمان باید درست باشد.</strong></p>
+        <p><strong>سه راه کاهش ناهماهنگی:</strong></p>
+        <ol>
+            <li>تغییر باور (Change Belief)</li>
+            <li>تغییر رفتار (Change Action)</li>
+            <li>تغییر ادراک از رفتار (Change Action Perception)</li>
+        </ol>
+        <div class="example-box"><span class="lbl">مثال:</span> سیگاری که می‌داند سیگار برای سلامتی مضر است (باور) اما سیگار می‌کشد (رفتار) دچار ناهماهنگی می‌شود. او می‌تواند: (۱) باور کند سیگار ضرر ندارد؛ (۲) سیگار را ترک کند؛ یا (۳) ادراک خود را تغییر دهد («فقط چند نخ در روز می‌کشم، ضرری ندارد»).</div>
+
+        <h4>ج) اثر «کم منجر به زیاد می‌شود» (Less-Leads-to-More Effect)</h4>
+        <p>این اثر یکی از مهم‌ترین یافته‌های ناهماهنگی شناختی است: <strong>هرچه توجیه بیرونی کمتر باشد، نیاز بیشتری به توجیه درونی وجود دارد</strong> و در نتیجه <strong>تغییر نگرش بیشتر است.</strong></p>
+        <div class="highlight-box"><strong>آزمایش کلاسیک فستینگر و کارل‌اسمیت:</strong> از آزمودنی‌ها خواستند کار خسته‌کننده‌ای انجام دهند و سپس به نفر بعدی بگویند کار «جالب» بوده. به یک گروه ۲۰ دلار و به گروه دیگر ۱ دلار دادند. <strong>گروهی که ۱ دلار گرفته بود (توجیه ناکافی) نگرش خود را واقعاً تغییر داد و کار را جالب‌تر ارزیابی کرد</strong>، زیرا نمی‌توانست با ۱ دلار رفتار خود را توجیه کند. گروه ۲۰ دلاری توجیه کافی داشت و نگرشش تغییر نکرد.</div>
+        <p><strong>شرایط وقوع این اثر:</strong></p>
+        <ol>
+            <li>تنها در موقعیت‌هایی رخ می‌دهد که مردم باور دارند <strong>حق انتخاب</strong> دارند. اجبار، ناهماهنگی را تضعیف می‌کند.</li>
+            <li>پاداش‌های کم تنها زمانی منجر به تغییر نگرش زیاد می‌شوند که مردم معتقد باشند <strong>شخصاً مسئول</strong> عمل خود هستند (مثلاً داوطلب شده باشند، نه اینکه از مافوق دستور گرفته باشند).</li>
+            <li>این اثر زمانی که افراد پول دریافتی را <strong>به عنوان رشوه</strong> تلقی کنند (نه به عنوان پرداختی به خاطر زحمتشان) رخ نخواهد داد.</li>
+        </ol>
+        <div class="highlight-box"><strong>نتیجه کاربردی:</strong> اگر می‌خواهید شخصی نگرش مثبت‌تری به چیزی پیدا کند، وادارش کنید به داشتن آن چیز متعهد شود؛ اما توجیه بیرونی کمتری به او بدهید.</div>
+
+        <h4>د) تنبیه نابسنده (Insufficient Punishment)</h4>
+        <p>همان منطق توجیه نابسنده، اما در مورد تنبیه: <strong>هرچه تهدید ملایم‌تر باشد، توجیه بیرونی کمتر است</strong> و در نتیجه فرد برای توجیه رفتار خود نگرش درونی‌تر و پایدارتری می‌سازد.</p>
+        <div class="example-box"><span class="lbl">ارونسون حدس می‌زند:</span> والدینی که برای متوقف ساختن پرخاشگری کودک، تنبیه سخت به کار می‌برند، دارای کودکانی هستند که <strong>در خانه چندان پرخاشگری نمی‌کنند اما در مدرسه و در بازی‌های خارج از خانه پرخاشگری زیادی نشان می‌دهند.</strong> دلیل: تنبیه سخت توجیه بیرونی کافی فراهم می‌کند و کودک نگرش درونی ضدپرخاشگری نمی‌سازد؛ در نتیجه وقتی نظارت والدین برداشته می‌شود، رفتار پرخاشگرانه برمی‌گردد. در مقابل، تهدید ملایم کودک را وادار می‌کند نگرش درونی «پرخاشگری بد است» را بسازد.</div>
+
+        <h4>ه) توجیه کوشش (Justification of Effort)</h4>
+        <p>نظریه ناهماهنگی شناختی پیش‌بینی می‌کند: <strong>اگر شخصی برای دستیابی به یک هدف سخت بکوشد، آن هدف برایش جالب‌تر خواهد بود تا کسی که همان هدف را با کوشش اندک یا بدون تلاش به دست آورد.</strong></p>
+        <div class="example-box"><span class="lbl">آزمایش کلاسیک (آرونسون و میلز):</span> دانشجویانی که برای ورود به یک گروه بحث، یک «آزمون سخت و خجالت‌آور» (آزمون شدید) داده بودند، گروه را بسیار جذاب‌تر از دانشجویانی ارزیابی کردند که آزمون آسان (یا بدون آزمون) داده بودند. زیرا آن‌ها برای عضویت «کوشش» کرده بودند و نمی‌توانستند بپذیرند گروهی که این‌قدر برایش زحمت کشیده‌اند، بی‌ارزش است.</div>
+        <div class="example-box"><span class="lbl">مثال روزمره:</span> عضویت در باشگاهی که شرایط سختی برای پذیرش دارد، برای فرد ارزشمندتر احساس می‌شود. یا درس‌هایی که سخت‌تر بوده‌اند، اغلب ارزشمندتر به یاد می‌مانند.</div>
+
+        <h4>و) ناهماهنگی شناختی و کارکرد انتخابی حافظه (جونز و کولر)</h4>
+        <p>ناهماهنگی شناختی می‌تواند بر حافظه اثر بگذارد: افراد اطلاعاتی را که با نگرش‌ها و تصمیم‌هایشان هماهنگ است، بهتر به یاد می‌آورند و اطلاعات ناهماهنگ را کمتر یادآوری می‌کنند. این «کارکرد انتخابی حافظه» به کاهش ناهماهنگی کمک می‌کند.</p>
+
+        <h4>ز) ناهماهنگی شناختی به عنوان پیامد اتخاذ یک تصمیم: گسترش گزینه‌ها (Spreading of Alternatives)</h4>
+        <p>وقتی فرد بین دو گزینه تصمیم می‌گیرد (مثلاً خرید یکی از دو ماشین)، پس از تصمیم، <strong>ارزیابی گزینه انتخاب‌شده را بالا و ارزیابی گزینه ردشده را پایین می‌آورد</strong> تا ناهماهنگی ناشی از تصمیم را کاهش دهد. این پدیده را «گسترش گزینه‌ها» می‌نامند.</p>
+        <div class="example-box"><span class="lbl">مطالعه سیمپسون و همکاران:</span> نمودار نشان می‌دهد ارزیابی محصول انتخاب‌شده پس از انتخاب افزایش و ارزیابی محصول ردشده کاهش می‌یابد.</div>
+
+        <h4>ح) توصیه‌های ماکیاولی (الیوت ارونسون)</h4>
+        <p>از اصول ناهماهنگی شناختی می‌توان به عنوان ابزاری برای تغییر نگرش افراد استفاده کرد. ارونسون دو توصیه ماکیاولی‌وار ارائه می‌دهد:</p>
+        <ol>
+            <li><strong>اگر می‌خواهید شخصی نگرش مثبت‌تری نسبت به چیزی پیدا کند، وادارش کنید تا به داشتن آن چیز متعهد شود.</strong></li>
+            <li><strong>اگر می‌خواهید کسی نگرش اخلاقی خود را نسبت به عملی خلاف، ملایم‌تر کند، او را اغوا کنید تا خود مرتکب آن عمل شود. برعکس، اگر می‌خواهید کسی نگرش‌های اخلاقی خود را نسبت به عملی خلاف، سخت‌تر کند، او را به انجام آن عمل وسوسه کنید اما نه به آن اندازه که وادار به ارتکاب آن عمل شود.</strong></li>
+        </ol>
+        <div class="highlight-box"><strong>توضیح:</strong> در حالت اول، فردی که عمل خلاف را انجام داده، برای کاهش ناهماهنگی نگرش خود را ملایم‌تر می‌کند. در حالت دوم، فردی که وسوسه شده اما مرتکب نشده، برای توجیه خود نگرش سخت‌تری علیه آن عمل می‌سازد.</div>
+
+        <h3>5-5. رشد شخصی و ناهماهنگی شناختی</h3>
+        <p>اگر شخصی تمام انرژی خود را صرف حفاظت از «من» خود کند، هرگز رشد نخواهد کرد. <strong>برای اینکه رشد کنیم باید از خطاهای خود درس بگیریم.</strong> اگر شخص منحصراً مصمم به کاهش ناهماهنگی باشد، به خطاهای خود اعتراف نمی‌کند؛ بلکه در عوض خطاهای خود را می‌پوشاند یا از آن بدتر، آن‌ها را به صورت فضائل خود جلوه می‌دهد.</p>
+        <p><strong>چگونه از طریق خطاها رشد کنیم؟</strong></p>
+        <ol>
+            <li>از طریق درک حالت دفاعی خود و تمایل به کاهش ناهماهنگی در خویشتن</li>
+            <li>از طریق تشخیص اینکه انجام دادن اعمال ابلهانه یا غیراخلاقی لزوماً به این معنی نیست که ما به‌طور تغییرناپذیر و ابدی ابله یا بی‌اخلاق هستیم</li>
+            <li>از طریق ایجاد قدرت نفس کافی برای تحمل خطاهای خود</li>
+            <li>از طریق افزایش توانایی خود در تشخیص منافع اعتراف به خطا به منظور رشد و یادگیری خود</li>
+        </ol>
+    `
+},
+
+c6: {
+    chip: "جمع‌بندی و نکات کلیدی",
+    html: `
+        <h2>📝 جمع‌بندی و نکات کلیدی برای آزمون</h2>
+
+        <h3>مفاهیم کلیدی که باید حتماً بلد باشید:</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>مفهوم</th><th>نکته کلیدی</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>نگرش</td><td>ارزشیابی نسبت به یک شیء/موضوع/پدیده؛ دارای سه جزء شناختی، عاطفی، رفتاری</td></tr>
+                    <tr><td>اثر در معرض قرار گرفتن صرف</td><td>تکرار مواجهه، نگرش را (معمولاً مثبت‌تر) می‌کند</td></tr>
+                    <tr><td>مقایسه اجتماعی</td><td>مقایسه خود با دیگران برای تعیین درستی دیدگاه‌ها</td></tr>
+                    <tr><td>شرطی شدن کلاسیک</td><td>محرک خنثی + محرک غیرشرطی ← محرک شرطی پاسخ می‌دهد</td></tr>
+                    <tr><td>شرطی شدن کنشگر</td><td>تقویت/تنبیه رفتار را تغییر می‌دهد</td></tr>
+                    <tr><td>الگوگیری</td><td>یادگیری نگرش از طریق مشاهده عمل دیگران (نه گفتارشان)</td></tr>
+                    <tr><td>رابطه نگرش-رفتار</td><td>ضعیف و بی‌ثبات است مگر در حضور متغیرهای تعدیل‌کننده</td></tr>
+                    <tr><td>متغیرهای تعدیل‌کننده</td><td>موقعیتی (اجبار، فشار وقت، امکان همخوانی)، نگرشی (منشأ، نیرومندی)، شخصی (خودنظارت‌گری، نیاز به شناخت)</td></tr>
+                    <tr><td>نظریه رفتار برنامه‌ریزی شده</td><td>نگرش + هنجار ذهنی + کنترل ادراک‌شده ← قصد ← رفتار (آجزن و فیشابین)</td></tr>
+                    <tr><td>نظریه تعادل هایدر</td><td>حالت‌های نامتعادل به سمت تعادل حرکت می‌کنند؛ حاصل‌ضرب سه رابطه</td></tr>
+                    <tr><td>ناهماهنگی شناختی فستینگر</td><td>تنش ناشی از ناسازگاری شناخت‌ها ← انگیزه کاهش ← تغییر باور/رفتار/ادراک</td></tr>
+                    <tr><td>اثر کم منجر به زیاد</td><td>توجیه بیرونی کمتر ← تغییر نگرش بیشتر (با شرایط: حق انتخاب، مسئولیت شخصی، نه رشوه)</td></tr>
+                    <tr><td>تنبیه نابسنده</td><td>تهدید ملایم‌تر ← نگرش درونی‌تر و پایدارتر</td></tr>
+                    <tr><td>توجیه کوشش</td><td>کوشش سخت برای هدف ← ارزشمندتر شدن آن هدف</td></tr>
+                    <tr><td>گسترش گزینه‌ها</td><td>پس از تصمیم، گزینه انتخابی محبوب‌تر و گزینه ردشده نامحبوب‌تر می‌شود</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>نمونه سؤالات تمرینی برای خودآزمایی:</h3>
+        <ol>
+            <li>سه جزء نگرش را با مثال توضیح دهید.</li>
+            <li>تفاوت نگرش با ارزش و واقعیت را بنویسید.</li>
+            <li>چهار عامل تکوین نگرش را نام برده و برای هر یک مثال بزنید.</li>
+            <li>چرا رابطه نگرش و رفتار همیشه قوی نیست؟ سه دسته متغیر تعدیل‌کننده را با مثال توضیح دهید.</li>
+            <li>نظریه رفتار برنامه‌ریزی شده را با نمودار توضیح دهید.</li>
+            <li>ناهماهنگی شناختی چیست؟ سه راه کاهش آن را بنویسید.</li>
+            <li>اثر «کم منجر به زیاد می‌شود» را با ذکر آزمایش فستینگر توضیح دهید و شرایط وقوع آن را بنویسید.</li>
+            <li>تفاوت نظریه تعادل و ناهماهنگی شناختی را بیان کنید.</li>
+            <li>توجیه کوشش را با مثال توضیح دهید.</li>
+            <li>توصیه‌های ماکیاولی ارونسون را شرح دهید.</li>
+        </ol>
+
+        <div class="highlight-box" style="margin-top:26px;">
+            <strong>پایان جزوه</strong><br>
+            این جزوه بر اساس فایل‌های ارائه‌شده (جلسات اول تا دهم) و کتاب «نگرش و تغییر نگرش» نوشته یوسف کریمی تدوین شده است. برای تسلط کامل، مطالعه کتاب اصلی و شرکت در کلاس‌های حل تمرین توصیه می‌شود.
+        </div>
+    `
+}
+};
+
+/* ================== توابع ناوبری ================== */
+let currentStudent = "";
+
+function enterMenu(){
+    const input = document.getElementById('studentName');
+    const name = input.value.trim();
+    if(name === ""){
+        input.style.borderColor = "#e53e3e";
+        input.style.boxShadow = "0 0 0 4px rgba(229,62,62,0.15)";
+        input.placeholder = "لطفاً نام خود را وارد کنید...";
+        input.focus();
+        return;
+    }
+    currentStudent = name;
+    document.getElementById('welcomeName').textContent = "خوش آمدید، " + name;
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('menuPage').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function openContent(key){
+    const data = contentData[key];
+    if(!data) return;
+    document.getElementById('contentChip').textContent = data.chip;
+    document.getElementById('articleCard').innerHTML = data.html;
+    document.getElementById('menuPage').style.display = 'none';
+    document.getElementById('contentPage').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function backToMenu(){
+    document.getElementById('contentPage').style.display = 'none';
+    document.getElementById('menuPage').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+/* اجازه ورود با کلید Enter */
+document.getElementById('studentName').addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){
+        enterMenu();
+    }
+});
+</script>
+</body>
+</html>
